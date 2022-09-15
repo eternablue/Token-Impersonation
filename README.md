@@ -42,7 +42,7 @@ ImpersonateLoggedOnUser(hToken);
 ```
 
 
-Now for the most intereseting part, we will use `DuplicateTokenEx` to, as the name suggests, duplcate the token of the target process and store it: 
+Now for the most intereseting part, we will use `DuplicateTokenEx` to, as the name suggests, duplicate the token of the target process and store it: 
 
 ```cpp
 DuplicateTokenEx(hToken, TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID | TOKEN_QUERY |
