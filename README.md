@@ -52,7 +52,8 @@ DuplicateTokenEx(hToken, TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID | TOKEN_Q
 We can then use the `CreateProcessWithTokenW` (no ANSI version 👎) to spwan a process, and specify the token that it wll have when created. We wll supplu the token we duplcated earlier : 
 
 ```cpp
-CreateProcessWithTokenW(hDupToken, LOGON_WITH_PROFILE, L"C:\\Windows\\System32\\cmd.exe", 0, 0, 0, 0, (LPSTARTUPINFOW)&startup_info, &process_info);
+CreateProcessWithTokenW(hDupToken, LOGON_WITH_PROFILE, L"C:\\Windows\\System32\\cmd.exe", 0, 0, 0, 0, 
+    (LPSTARTUPINFOW)&startup_info, &process_info);
 ```
 
 ## Showcase
