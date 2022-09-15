@@ -57,3 +57,5 @@ CreateProcessWithTokenW(hDupToken, LOGON_WITH_PROFILE, L"C:\\Windows\\System32\\
 ```
 
 ## Showcase
+
+![image](https://cdn.discordapp.com/attachments/780153367305256981/1020005729031180411/demo_token.gif)
