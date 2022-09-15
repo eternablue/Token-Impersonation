@@ -49,7 +49,7 @@ DuplicateTokenEx(hToken, TOKEN_ADJUST_DEFAULT | TOKEN_ADJUST_SESSIONID | TOKEN_Q
     TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY, 0, SecurityImpersonation, TokenPrimary, &hDupToken);
 ```
 
-We can then use the `CreateProcessWithTokenW` (no ANSI version 👎) to spwan a process, and specify the token that it wll have when created. We wll supplu the token we duplcated earlier : 
+We can then use the `CreateProcessWithTokenW` (no ANSI version 👎) to spawn a process, and specify the token that it wll have when created. We wll supplu the token we duplcated earlier : 
 
 ```cpp
 CreateProcessWithTokenW(hDupToken, LOGON_WITH_PROFILE, L"C:\\Windows\\System32\\cmd.exe", 0, 0, 0, 0, 
